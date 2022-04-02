@@ -127,7 +127,13 @@ export default {
           const arr = res.data.products.filter(item => item.category === this.category && item.id !== id)
           if (arr.length >= 4) {
             for (let i = 0; i < 4; i++) {
-              this.relativeProducts.push(arr[i])
+              const x = Math.floor(Math.random() * arr.length)
+              if (this.relativeProducts.includes(arr[x])) {
+                i--
+                continue
+              } else {
+                this.relativeProducts.push(arr[x])
+              }
             }
           } else {
             for (let i = 0; i < arr.length; i++) {
