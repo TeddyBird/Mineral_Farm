@@ -22,25 +22,32 @@ export default {
 </script>
 
 <style lang="scss">
-    .to-top{
-        position: fixed;
-        bottom: 50px;
-        right: 20px;
-        width: 85px;
-        cursor: pointer;
-        .to-top-img{
+.to-top{
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    width: 85px;
+    z-index: 80;
+    border-radius: 10px;
+    cursor: pointer;
+    .to-top-img{
+        width: 100%;
+        img{
             width: 100%;
-            img{
-                width: 100%;
-                vertical-align: middle;
-            }
-        }
-        span{
-            display: block;
-            font-size: 20px;
-            font-weight: 600;
-            text-align: center;
-            color: rgb(49, 49, 49);
+            vertical-align: middle;
         }
     }
+    span{
+        display: block;
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        color: rgb(49, 49, 49);
+    }
+}
+@media screen and (max-width:576px) {
+  .to-top{
+    display: none;
+  }
+}
 </style>
