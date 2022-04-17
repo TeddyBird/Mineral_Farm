@@ -1,5 +1,5 @@
 <template>
-    <Loading v-if="isLoading"></Loading>
+    <Loading v-if="isLoading"/>
     <div class="container">
         <table class="table mt-4">
             <thead>
@@ -60,9 +60,9 @@
                 </template>
             </tbody>
         </table>
-        <OrderModal :order="tempOrder" @close-modal="closeOrderModal" @update-paid="updatePaid"></OrderModal>
-        <DelOrderModal :order="tempOrder" @close-del="closeDelOrderModal" @get-orders="getOrders(); closeDelOrderModal()"></DelOrderModal>
-        <pagination :pages="paginationInfo" @get-page="getOrders"></pagination>
+        <OrderModal :order="tempOrder" @close-modal="closeOrderModal" @update-paid="updatePaid"/>
+        <DelOrderModal :order="tempOrder" @close-del="closeDelOrderModal" @get-orders="getOrders(); closeDelOrderModal()"/>
+        <pagination :pages="paginationInfo" @get-page="getOrders"/>
     </div>
 </template>
 

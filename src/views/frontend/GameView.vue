@@ -3,37 +3,37 @@
         <div class="coupon-area">
             <span class="close" @click="resetGame"><i class="fa-solid fa-xmark"></i></span>
             <div class="coupon-img">
-                <img src="../assets/goddess_happy.png" alt="">
+                <img src="../../assets/goddess_happy.png" alt="女神高興表情">
             </div>
             <div class="coupon-txt">
                 <p>連續答對{{score}}次太厲害了! 就送你優惠碼吧!</p>
-                <p>優惠碼: <strong>megami666</strong></p>
+                <p>優惠碼: <strong id="coupon">megami666</strong><button type="button" @click="copyCoupon">複製</button></p>
             </div>
         </div>
     </div>
     <div class="game-section">
         <div class="container">
             <div class="game">
-                <img class="game-TV-bg" src="../assets/TVbg.png" alt="">
-                <img class="game-pad-bg" src="../assets/pad.png" alt="">
+                <img class="game-TV-bg" src="../../assets/TVbg.png" alt="電視背景圖">
+                <img class="game-pad-bg" src="../../assets/pad.png" alt="平板背景圖">
                 <div class="talk-section">
                     <div class="talk" v-if="gameStatus==='start'" @click="gameStatus='play'">
                         <p>嗨~ 和我一起玩數字猜大小遊戲吧!</p>
                         <p>數字範圍是0~9喔</p>
                         <span>點擊對話框開始遊戲<i class="fa-solid fa-caret-down"></i></span>
                         <div class="megami">
-                            <img src="../assets/goddess_everyday.png" alt="">
+                            <img src="../../assets/goddess_everyday.png" alt="女神一般表情">
                         </div>
                     </div>
                     <template v-if="gameStatus === 'play' || gameStatus === 'continue'">
                         <div class="talk"  v-if = "runDown === 1">
                             <p>現在數字是{{newNum}}，下個數字會比較...</p>
                             <div class="game-btn">
-                                <button @click = "guessNum('big')">大</button>
-                                <button @click = "guessNum('small')">小</button>
+                                <button type="button" @click = "guessNum('big')">大</button>
+                                <button type="button" @click = "guessNum('small')">小</button>
                             </div>
                             <div class="megami">
-                                <img src="../assets/goddess_everyday.png" alt="">
+                                <img src="../../assets/goddess_everyday.png" alt="女神一般表情">
                             </div>
                         </div>
                         <template v-if = "runDown === 2">
@@ -42,7 +42,7 @@
                                 <p>答對啦!!繼續吧~~</p>
                                 <span>點擊對話框繼續遊戲<i class="fa-solid fa-caret-down"></i></span>
                                 <div class="megami">
-                                    <img src="../assets/goddess_happy.png" alt="">
+                                    <img src="../../assets/goddess_happy.png" alt="女神高興表情">
                                 </div>
                             </div>
                             <div class="talk" v-if ="gameResult ==='wrong'" @click="resetGame">
@@ -50,14 +50,14 @@
                                 <p>答錯囉，總共連續答對{{score}}次，要再玩一次嗎?</p>
                                 <span>點擊對話框重新遊戲<i class="fa-solid fa-caret-down"></i></span>
                                 <div class="megami">
-                                    <img src="../assets/goddess_sad.png" alt="">
+                                    <img src="../../assets/goddess_sad.png" alt="女神失望表情">
                                 </div>
                             </div>
                             <div class="talk" v-if ="gameResult ==='nothing'" @click = "runDown = 1">
                                 <p>結果是{{newNum}}，剛剛是{{oldNum}}，剛好一樣呢，再猜一次吧~</p>
                                 <span>點擊對話框繼續遊戲<i class="fa-solid fa-caret-down"></i></span>
                                 <div class="megami">
-                                    <img src="../assets/goddess_concerned.png" alt="">
+                                    <img src="../../assets/goddess_concerned.png" alt="女神驚訝表情">
                                 </div>
                             </div>
                         </template>
@@ -123,6 +123,14 @@ export default {
       this.runDown = 1
       this.score = 0
       this.count = 0
+    },
+    copyCoupon () {
+      const TextRange = document.createRange()
+      TextRange.selectNode(document.getElementById('coupon'))
+      const sel = window.getSelection()
+      sel.removeAllRanges()
+      sel.addRange(TextRange)
+      document.execCommand('copy')
     }
   },
   mounted () {
@@ -139,10 +147,10 @@ export default {
     top: 0;
     left: 0;
     background-color: rgba(0,0,0,0.5);
-    z-index: 30;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 999;
     .coupon-area{
         width: 30%;
         background-color: rgb(143, 200, 102);
@@ -161,6 +169,12 @@ export default {
             right: -15px;
             text-align: center;
             font-size: 32px;
+            &:hover{
+                .fa-xmark{
+                    transform: rotate(180deg);
+                    transition: transform 1s;
+                }
+            }
         }
         .coupon-img{
             width: 80%;
@@ -173,11 +187,18 @@ export default {
         .coupon-txt{
             padding: 20px;
             text-align: center;
+            font-family: 'cwTeXYen', 'Noto Sans TC', sans-serif;
             p{
                 font-size: 24px;
                 font-weight: 600;
                 strong{
                     color: red;
+                    margin-right: 10px;
+                }
+                button{
+                    border: none;
+                    border-radius: 5px;
+                    font-size: 18px;
                 }
             }
         }
@@ -185,11 +206,12 @@ export default {
 }
 .game-section{
     padding: 30px 0;
-    background-image: url(../assets/bg_pattern_brick.png);
+    background-image: url(../../assets/bg_pattern_brick.png);
     min-height: calc(100vh - 225px);
+    font-family: 'cwTeXYen', 'Noto Sans TC', sans-serif;
     .game{
         position: relative;
-        background-image: url(../assets/Goddess_Introduction.png);
+        background-image: url(../../assets/Goddess_Introduction.png);
         background-size: cover;
         .game-TV-bg{
             width: 100%;
@@ -250,7 +272,7 @@ export default {
             &::before{
                 content: '';
                 position: absolute;
-                background-image: url(../assets/bk_left.png);
+                background-image: url(../../assets/bk_left.png);
                 background-size: cover;
                 z-index: -1;
                 top: 0;
@@ -261,7 +283,7 @@ export default {
             &::after{
                 content: '';
                 position: absolute;
-                background-image: url(../assets/bk_right.png);
+                background-image: url(../../assets/bk_right.png);
                 background-size: cover;
                 z-index: -1;
                 top: 0;

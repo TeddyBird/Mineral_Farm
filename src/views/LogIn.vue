@@ -1,5 +1,5 @@
 <template>
-    <Header></Header>
+    <Header/>
     <div class="log-in">
         <div class="log-area">
             <h2>管理員登入</h2>
@@ -16,7 +16,7 @@
             </form>
         </div>
     </div>
-    <Footer></Footer>
+    <Footer/>
 </template>
 
 <script>

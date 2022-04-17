@@ -1,8 +1,8 @@
 <template>
-    <Loading v-if="isLoading"></Loading>
+    <Loading v-if="isLoading"/>
     <div class="container">
         <div class="text-end mt-4">
-          <button class="btn btn-primary" @click ="toggleProductModal('create')">
+          <button type="button" class="btn btn-primary" @click ="toggleProductModal('create')">
             建立新的產品
           </button>
         </div>
@@ -40,10 +40,10 @@
             </tr>
           </tbody>
         </table>
-        <pagination :pages="paginationInfo" @get-page="getData"></pagination>
+        <pagination :pages="paginationInfo" @get-page="getData"/>
     </div>
-    <ProductModal :current-product="currentProduct" :action="action" @get-data="getData" @close-modal="toggleProductModal('close')"></ProductModal>
-    <DelModal :current-product="currentProduct" :action="action" @get-data="getData" @close-del="toggleDelMoadal('', 'close')"></DelModal>
+    <ProductModal :current-product="currentProduct" :action="action" @get-data="getData" @close-modal="toggleProductModal('close')"/>
+    <DelModal :current-product="currentProduct" :action="action" @get-data="getData" @close-del="toggleDelMoadal('', 'close')"/>
 </template>
 
 <script>

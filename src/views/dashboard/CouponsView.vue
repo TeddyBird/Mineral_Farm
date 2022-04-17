@@ -1,5 +1,5 @@
 <template>
-    <Loading v-if="isLoading"></Loading>
+    <Loading v-if="isLoading"/>
     <div class="container">
         <div class="text-end mt-4">
             <button class="btn btn-primary" type="button" @click="openCouponModal('create')">
@@ -27,10 +27,10 @@
                     </td>
                     <td>
                         <div class="btn-group">
-                            <button class="btn btn-outline-primary btn-sm"
+                            <button type="button" class="btn btn-outline-primary btn-sm"
                             @click="openCouponModal('update', coupon)"
                             >編輯</button>
-                            <button class="btn btn-outline-danger btn-sm"
+                            <button type="button" class="btn btn-outline-danger btn-sm"
                             @click="openDelCoupon(coupon)"
                             >刪除</button>
                         </div>
@@ -38,10 +38,10 @@
                 </tr>
             </tbody>
         </table>
-         <pagination :pages="paginationInfo" @get-page="getCoupons"></pagination>
+         <pagination :pages="paginationInfo" @get-page="getCoupons"/>
     </div>
-    <CouponModal :coupon="tempCoupon" :action="action" @close-coupon="closeCouponModal" @get-coupons="getCoupons"></CouponModal>
-    <DelCouponModal :coupon="tempCoupon" @close-del="closeDelCoupon" @get-coupons="getCoupons"></DelCouponModal>
+    <CouponModal :coupon="tempCoupon" :action="action" @close-coupon="closeCouponModal" @get-coupons="getCoupons"/>
+    <DelCouponModal :coupon="tempCoupon" @close-del="closeDelCoupon" @get-coupons="getCoupons"/>
 </template>
 
 <script>

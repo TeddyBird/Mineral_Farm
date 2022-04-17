@@ -1,6 +1,6 @@
 <template>
-    <DashHeader></DashHeader>
-    <router-view v-if="checkSuccess"></router-view>
+    <DashHeader/>
+    <RouterView v-if="checkSuccess"/>
 </template>
 
 <script>

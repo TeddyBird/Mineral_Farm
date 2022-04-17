@@ -1,6 +1,6 @@
 <template>
-  <Toast></Toast>
-  <router-view/>
+  <Toast/>
+  <RouterView/>
 </template>
 
 <script>
@@ -22,6 +22,7 @@ export default {
 <style lang="scss">
 @import "bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100&display=swap');
+@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
 
 body {
   font-family: 'Noto Sans TC', sans-serif;

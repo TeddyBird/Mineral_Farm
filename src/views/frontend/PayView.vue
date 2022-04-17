@@ -1,6 +1,6 @@
 <template>
     <div class="pay">
-        <Loading v-if="isLoading"></Loading>
+        <Loading v-if="isLoading"/>
         <ol class="cart-progress">
             <li><span>step 1</span>確認清單</li>
             <li><span>step 2</span>填寫資料</li>
@@ -19,7 +19,7 @@
                 <tbody>
                     <tr v-for="item in orderInfo.products" :key="item.id">
                         <td>
-                            <img :src="item.product.imageUrl" alt="">
+                            <img :src="item.product.imageUrl" :alt="item.product.title">
                             <span>{{item.product.title}}</span>
                         </td>
                         <td>
@@ -121,7 +121,7 @@ export default {
 
 <style lang="scss">
 .pay{
-  background-image: url(../assets/mainbg-s.jpg);
+  background-image: url(../../assets/mainbg-s.jpg);
   background-size: cover;
   background-position-y: bottom;
   padding: 50px 0;
@@ -138,7 +138,6 @@ export default {
     li{
       text-align: center;
       font-size: 16px;
-      color: rgb(49, 49, 49);
         span{
             display: block;
             border: 1px solid rgb(185, 142, 81);
@@ -169,7 +168,7 @@ export default {
             border: 1px solid rgb(107, 79, 43);
             &::after{
                 content: '';
-                background-image: url(../assets/racehorse.png);
+                background-image: url(../../assets/racehorse.png);
                 background-size: cover;
                 width: 57px;
                 height: 48px;
@@ -229,7 +228,7 @@ export default {
             }
             &:last-child{
                 td{
-                    font-size: 28px;
+                    font-size: 24px;
                     font-weight: 600;
                 }
             }
@@ -294,6 +293,41 @@ export default {
     .customer-info{
         width: 100%;
     }
+}
+@media screen and (max-width:500px) {
+  .cart-progress{
+      li{
+          span{
+              display: block;
+          }
+          & + li span::before{
+              content: '';
+              width: 100px;
+              left: -100px;
+          }
+      }
+  }
+}
+@media screen and (max-width:430px) {
+  .cart-progress{
+      li{
+          span{
+              padding: 5px 10px;
+          }
+          & + li span::before{
+              content: '';
+              width: 50px;
+              left: -50px;
+          }
+      }
+      .cur-step{
+        span{
+            &::after{
+                right: -2px;
+            }
+        }
+    }
+  }
 }
 @media screen and (max-width:470px) {
     .order-list{

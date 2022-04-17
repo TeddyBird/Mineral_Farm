@@ -1,6 +1,6 @@
 <template>
   <div class="order">
-    <Loading v-if="isLoading"></Loading>
+    <Loading v-if="isLoading"/>
       <ol class="cart-progress">
           <li><span>step 1</span>確認清單</li>
           <li class="cur-step"><span>step 2</span>填寫資料</li>
@@ -13,33 +13,33 @@
                   <label for="name">姓名</label>
                   <span>必填</span>
                   <Field id="name" name="姓名" rules="required" type="text" placeholder="請填寫姓名" v-model="form.user.name"></Field>
-                  <error-message name="姓名" class="err-msg"></error-message>
+                  <ErrorMessage name="姓名" class="err-msg"/>
               </div>
               <div class="form-group">
                   <label for="email">信箱</label>
                   <span>必填</span>
-                  <Field id="email" name="email" rules="email|required" type="email" placeholder="請填寫信箱" v-model="form.user.email"></Field>
-                  <error-message name="email" class="err-msg"></error-message>
+                  <Field id="email" name="信箱" rules="email|required" type="email" placeholder="請填寫信箱" v-model="form.user.email"></Field>
+                  <ErrorMessage name="信箱" class="err-msg"/>
               </div>
               <div class="form-group">
-                  <label for="tel">電話</label>
+                  <label for="tel">手機</label>
                   <span>必填</span>
-                  <Field id="tel" name="電話" type="tel" rules="required|numeric|min:10" placeholder="請填寫電話" v-model="form.user.tel"></Field>
-                  <error-message name="電話" class="err-msg"></error-message>
+                  <Field id="tel" name="手機" type="tel" :rules="isPhone" placeholder="請填寫手機" v-model="form.user.tel"></Field>
+                  <ErrorMessage name="手機" class="err-msg"/>
               </div>
               <div class="form-group">
                   <label for="address">地址</label>
                   <span>必填</span>
                   <Field id="address" name="地址" rules="required" type="text" placeholder="請填寫地址" v-model="form.user.address"></Field>
-                  <error-message name="地址" class="err-msg"></error-message>
+                  <ErrorMessage name="地址" class="err-msg"/>
               </div>
               <div class="form-group">
                   <label for="msg">備註</label>
                   <textarea id="msg" placeholder="有特別事項請輸入在這" v-model="form.message"></textarea>
               </div>
               <div class="form-btn">
-                  <button @click="this.$router.push('/cart')">上一步</button>
-                  <button  class="to-pay" type="button" @click="createOrder" v-if = "Object.keys(errors).length === 0">下一步</button>
+                  <button type="button" @click="this.$router.push('/cart')">上一步</button>
+                  <button class="to-pay" type="button" @click="createOrder" v-if = "Object.keys(errors).length === 0">下一步</button>
               </div>
           </form>
       </div>
@@ -76,6 +76,7 @@ export default {
         .then((res) => {
           this.isLoading = false
           localStorage.setItem('orderId', JSON.stringify(res.data.orderId))
+          this.emitter.emit('push-cart')
           this.emitter.emit('push-toast', {
             style: 'success',
             title: '已建立訂單'
@@ -83,12 +84,17 @@ export default {
           this.$router.push('/pay')
         })
         .catch((err) => {
+          this.isLoading = false
           this.emitter.emit('push-toast', {
             style: 'danger',
             title: '訂單建立失敗',
             content: err.response.data.message
           })
         })
+    },
+    isPhone (value) {
+      const phoneNumber = /^(09)[0-9]{8}$/
+      return phoneNumber.test(value) ? true : '需要正確的手機號碼'
     }
   }
 }
@@ -96,7 +102,7 @@ export default {
 
 <style lang="scss">
 .order{
-  background-image: url(../assets/mainbg-s.jpg);
+  background-image: url(../../assets/mainbg-s.jpg);
   background-size: cover;
   background-position-y: bottom;
   padding: 50px 0;
@@ -113,7 +119,6 @@ export default {
     li{
       text-align: center;
       font-size: 16px;
-      color: rgb(49, 49, 49);
         span{
             display: block;
             border: 1px solid rgb(185, 142, 81);
@@ -144,7 +149,7 @@ export default {
             border: 1px solid rgb(107, 79, 43);
             &::after{
                 content: '';
-                background-image: url(../assets/racehorse.png);
+                background-image: url(../../assets/racehorse.png);
                 background-size: cover;
                 width: 57px;
                 height: 48px;
@@ -191,6 +196,12 @@ export default {
                 padding: 5px;
                 font-size: 18px;
             }
+            input:-webkit-autofill,
+            input:-webkit-autofill:hover,
+            input:-webkit-autofill:focus {
+            box-shadow:0 0 0 60px white inset;
+                -webkit-text-fill-color: black;
+            }
             textarea{
                 width: 100%;
                 border: 1px solid #ccc;
@@ -231,6 +242,41 @@ export default {
   .check-form{
       max-width: 800px;
       margin: 0 20px;
+  }
+}
+@media screen and (max-width:500px) {
+  .cart-progress{
+      li{
+          span{
+              display: block;
+          }
+          & + li span::before{
+              content: '';
+              width: 100px;
+              left: -100px;
+          }
+      }
+  }
+}
+@media screen and (max-width:430px) {
+  .cart-progress{
+      li{
+          span{
+              padding: 5px 10px;
+          }
+          & + li span::before{
+              content: '';
+              width: 50px;
+              left: -50px;
+          }
+      }
+      .cur-step{
+        span{
+            &::after{
+                right: -2px;
+            }
+        }
+    }
   }
 }
 @keyframes horserun {

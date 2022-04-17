@@ -10,10 +10,10 @@
             <div class="finish-content">
                 <div class="finish-txt">
                     <p>感謝您的購買!!</p>
-                    <button @click="this.$router.push('/products')">繼續購買</button>
+                    <button type="button" @click="this.$router.push('/products')">繼續購買</button>
                 </div>
                 <div class="finish-img">
-                    <img src="../assets/peat.png" alt="">
+                    <img src="../../assets/peat.png" alt="牧場主人">
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
 
 <style lang="scss">
 .finish{
-  background-image: url(../assets/mainbg-s.jpg);
+  background-image: url(../../assets/mainbg-s.jpg);
   background-size: cover;
   background-position-y: bottom;
   padding: 50px 0;
@@ -39,7 +39,6 @@
     li{
       text-align: center;
       font-size: 16px;
-      color: rgb(49, 49, 49);
         span{
             display: block;
             border: 1px solid rgb(185, 142, 81);
@@ -70,7 +69,7 @@
             border: 1px solid rgb(107, 79, 43);
             &::after{
                 content: '';
-                background-image: url(../assets/racehorse.png);
+                background-image: url(../../assets/racehorse.png);
                 background-size: cover;
                 width: 57px;
                 height: 48px;
@@ -100,14 +99,14 @@
         left: 10%;
         p{
             font-size: 24px;
-            color: rgb(49, 49, 49);
             font-weight: 600;
+            margin-bottom: 20px;
         }
         button{
             border: none;
             border-radius: 5px;
             padding: 5px 20px;
-            font-size: 18px;
+            font-size: 24px;
             display: block;
             background-color: rgb(143, 200, 102);
             color: white;
@@ -116,6 +115,41 @@
             }
         }
     }
+}
+@media screen and (max-width:500px) {
+  .cart-progress{
+      li{
+          span{
+              display: block;
+          }
+          & + li span::before{
+              content: '';
+              width: 100px;
+              left: -100px;
+          }
+      }
+  }
+}
+@media screen and (max-width:430px) {
+  .cart-progress{
+      li{
+          span{
+              padding: 5px 10px;
+          }
+          & + li span::before{
+              content: '';
+              width: 50px;
+              left: -50px;
+          }
+      }
+      .cur-step{
+        span{
+            &::after{
+                right: -2px;
+            }
+        }
+    }
+  }
 }
 @keyframes horserun {
   0% {

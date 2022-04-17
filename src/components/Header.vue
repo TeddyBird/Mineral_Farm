@@ -1,12 +1,7 @@
 <template>
     <header>
-        <div class="burger" @click="toggleMenu = !toggleMenu" :class="{toggleburger: toggleMenu}">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
         <h1 class="logo">
-            <router-link to="/" @click="toggleMenu = !toggleMenu">
+            <router-link to="/">
                 <img src="../assets/logo.png" alt="">
             </router-link>
         </h1>
@@ -28,6 +23,11 @@
                     <i class="fa-solid fa-user-gear"></i>
                 </router-link>
         </div>
+        <div class="burger" @click="toggleMenu = !toggleMenu" :class="{toggleburger: toggleMenu}">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </header>
 </template>
 
@@ -48,6 +48,11 @@ export default {
         .then((res) => {
           this.cartData = res.data.data
         })
+    }
+  },
+  watch: {
+    $route () {
+      this.toggleMenu = false
     }
   },
   mounted () {
@@ -81,8 +86,8 @@ header{
         }
     }
     .burger{
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
         border-radius: 5px;
         background-color: rgb(185, 142, 81);
         display: none;
@@ -90,8 +95,8 @@ header{
         position: relative;
         z-index: 99;
         span{
-            width: 40px;
-            height: 3px;
+            width: 30px;
+            height: 2px;
             background-color: white;
             position: absolute;
             left: 0;
@@ -171,12 +176,6 @@ header{
 @media screen and (max-width:1200px) {
     header{
         padding: 15px 20px;
-        .logo{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-        }
         .burger{
             display: flex;
         }
@@ -184,12 +183,12 @@ header{
             span{
                 &:first-child{
                     transform: rotate(45deg);
-                    top: 23px;
+                    top: 19px;
                     transition: transform 0.2s 0.5s, top 0.5s;
                 }
                 &:last-child{
                     transform: rotate(-45deg);
-                    bottom: 23px;
+                    bottom: 19px;
                     transition: transform 0.2s 0.5s, bottom 0.5s;
                 }
                 &:nth-child(2){
@@ -223,11 +222,49 @@ header{
             max-height: 150px;
             transition: 0.3s linear;
         }
+        .nav-icon{
+            position: absolute;
+            right: 80px;
+        }
     }
 }
 @media screen and (max-width: 460px) {
     header{
+        .burger{
+            width: 30px;
+            height: 30px;
+            span{
+                width: 20px;
+                height: 1px;
+                &:first-child{
+                    top: 8px;
+                }
+                &:last-child{
+                    bottom: 8px;
+                }
+            }
+        }
+        .toggleburger{
+            span{
+                &:first-child{
+                    transform: rotate(45deg);
+                    top: 14.5px;
+                    transition: transform 0.2s 0.5s, top 0.5s;
+                }
+                &:last-child{
+                    transform: rotate(-45deg);
+                    bottom: 14.5px;
+                    transition: transform 0.2s 0.5s, bottom 0.5s;
+                }
+                &:nth-child(2){
+                    opacity: 0;
+                    transition: opacity 0.5s;
+                }
+
+            }
+        }
         .nav-icon{
+            right: 60px;
             a{
                 font-size: 18px;
                 &:first-child{
@@ -243,6 +280,9 @@ header{
 @media screen and (max-width: 375px) {
     header{
         padding: 15px 10px;
+        .nav-icon{
+            right: 45px;
+        }
     }
 }
 </style>

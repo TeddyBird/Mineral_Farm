@@ -1,6 +1,6 @@
 <template>
   <div class="cart">
-    <Loading v-if="isLoading"></Loading>
+    <Loading v-if="isLoading"/>
       <ol class="cart-progress">
           <li class="cur-step"><span>step 1</span>確認清單</li>
           <li><span>step 2</span>填寫資料</li>
@@ -13,7 +13,7 @@
                   <table class="cart-content">
                       <thead>
                           <tr>
-                              <th>品名</th>
+                              <th colspan="2">品名</th>
                               <th>數量</th>
                               <th>單位</th>
                               <th>小計</th>
@@ -22,24 +22,41 @@
                       </thead>
                       <tbody>
                           <tr v-if ="cartData.carts.length === 0">
-                            <td class="no-item" colspan="5">
+                            <td class="no-item" colspan="6">
                               您的購物車內還沒有商品，趕快前往<router-link to="/products">商店</router-link>吧!
                             </td>
                           </tr>
                           <tr v-for="item in cartData.carts" :key="item.id">
                               <td>
-                                  <img :src="item.product.imageUrl" alt="">
-                                  <span>{{item.product.title}}</span>
+                                  <img :src="item.product.imageUrl" :alt="item.product.title">
                               </td>
+                              <td>{{item.product.title}}</td>
                               <td><input min="1" type="number" v-model.number="item.qty" @change = "updateCart(item)"></td>
                               <td>{{item.product.unit}}</td>
                               <td>{{item.total}} G</td>
-                              <td><button @click="removeCart(item.id)"><i class="fa-solid fa-trash"></i></button></td>
-                          </tr>
-                          <tr>
-                            <td colspan="5">
-                                <button @click="removeAllCart" class="remove-btn"><i class="fa-solid fa-trash"></i>刪除全部</button>
+                              <td>
+                                <button type="button" @click="removeId = item.product.id"><i class="fa-solid fa-trash"></i>
+                                </button>
                               </td>
+                              <div class="remove-check" v-if="removeId === item.product.id || removeId === 'all'">
+                                <div class="remove-check-area">
+                                  <span class="close" @click="removeId=''"><i class="fa-solid fa-xmark"></i></span>
+                                  <div class="remove-img">
+                                    <img src="../../assets/cherry_sad.png" alt="精靈傷心表情
+                                    ">
+                                  </div>
+                                  <p v-if="removeId==='all'">確認刪除<span>全部商品</span>嗎?</p>
+                                  <p v-else>確認刪除<span>{{item.product.title}}</span>嗎?</p>
+                                  <button type="button" @click="removeId==='all'? removeAllCart() : removeCart(item.id)">確認</button>
+                                </div>
+                              </div>
+                          </tr>
+                          <tr v-if ="cartData.carts.length !== 0">
+                            <td colspan="6">
+                              <button type="button" @click = "removeId='all'" class="remove-btn">
+                                <i class="fa-solid fa-trash"></i>刪除全部
+                              </button>
+                            </td>
                           </tr>
                       </tbody>
                   </table>
@@ -57,12 +74,12 @@
                         <span>總計</span><p>{{cartData.final_total}} G</p>
                       </div>
                       <div class="coupon-btn" v-if="cartData.carts.length !== 0">
-                        <input type="text" placeholder="小遊戲可取得優惠碼喔" v-model="couponCode">
+                        <input ref="couponinput" type="text" placeholder="小遊戲可取得優惠碼喔!" v-model="couponCode">
                         <button type="button" @click="useCoupon">使用</button>
                       </div>
                       <div class="step-btn">
-                          <button @click="this.$router.push('/products')">回到商店</button>
-                          <button class="to-order" @click="this.$router.push('/order')" v-if="cartData.carts.length !== 0">下一步</button>
+                          <button type="button" @click="this.$router.push('/products')">回到商店</button>
+                          <button type="button" class="to-order" @click="this.$router.push('/order')" v-if="cartData.carts.length !== 0">下一步</button>
                       </div>
                   </div>
               </div>
@@ -82,7 +99,8 @@ export default {
         carts: []
       },
       couponCode: '',
-      couponUsed: false
+      couponUsed: false,
+      removeId: ''
     }
   },
   components: {
@@ -126,6 +144,7 @@ export default {
       this.$http.delete(`${process.env.VUE_APP_API}v2/api/${process.env.VUE_APP_PATH}/cart/${id}`)
         .then(() => {
           this.getCartData()
+          this.removeId = ''
           this.isLoading = false
           this.emitter.emit('push-cart')
           this.emitter.emit('push-toast', {
@@ -134,6 +153,8 @@ export default {
           })
         })
         .catch((err) => {
+          this.isLoading = false
+          this.removeId = ''
           this.emitter.emit('push-toast', {
             style: 'danger',
             title: '移除商品失敗',
@@ -146,6 +167,7 @@ export default {
       this.$http.delete(`${process.env.VUE_APP_API}v2/api/${process.env.VUE_APP_PATH}/carts`)
         .then(() => {
           this.getCartData()
+          this.removeId = ''
           this.isLoading = false
           this.emitter.emit('push-cart')
           this.emitter.emit('push-toast', {
@@ -154,6 +176,8 @@ export default {
           })
         })
         .catch((err) => {
+          this.isLoading = false
+          this.removeId = ''
           this.emitter.emit('push-toast', {
             style: 'danger',
             title: '清空購物車失敗',
@@ -167,7 +191,10 @@ export default {
         .then(res => {
           this.getCartData()
           this.couponUsed = res.data.success
-          console.log(res.data)
+        })
+        .catch(() => {
+          this.$refs.couponinput.value = ''
+          this.$refs.couponinput.placeholder = '小遊戲可取得優惠碼喔!'
         })
     }
   },
@@ -179,7 +206,7 @@ export default {
 
 <style lang="scss">
 .cart{
-  background-image: url(../assets/mainbg-s.jpg);
+  background-image: url(../../assets/mainbg-s.jpg);
   background-size: cover;
   background-position-y: bottom;
   padding: 50px 0;
@@ -196,7 +223,6 @@ export default {
     li{
       text-align: center;
       font-size: 16px;
-      color: rgb(49, 49, 49);
         span{
             display: block;
             border: 1px solid rgb(185, 142, 81);
@@ -227,7 +253,7 @@ export default {
             border: 1px solid rgb(107, 79, 43);
             &::after{
                 content: '';
-                background-image: url(../assets/racehorse.png);
+                background-image: url(../../assets/racehorse.png);
                 background-size: cover;
                 width: 57px;
                 height: 48px;
@@ -238,6 +264,95 @@ export default {
             }
         }
     }
+}
+.remove-check{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    .remove-check-area{
+        width: 20%;
+        background-color: rgb(143, 200, 102);
+        border-radius: 10px;
+        border: 5px solid white;
+        position: relative;
+      .close{
+          width: 50px;
+          height: 50px;
+          display: block;
+          border-radius: 50%;
+          color: white;
+          background-color: rgb(16, 17, 17);
+          position: absolute;
+          top: -15px;
+          right: -15px;
+          text-align: center;
+          font-size: 32px;
+          &:hover{
+            .fa-xmark{
+              transform: rotate(180deg);
+              transition: transform 1s;
+            }
+          }
+      }
+      .remove-img{
+        width: 80%;
+        margin: auto;
+        img{
+          width: 100%;
+          vertical-align: middle;
+        }
+      }
+      p{
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        padding: 5px 0;
+        margin-bottom: 0;
+        span{
+          color: red;
+        }
+      }
+      button{
+        border: none;
+        font-size: 18px;
+        border-radius: 5px;
+        padding: 5px 10px;
+        background-color: #eee;
+        display: block;
+        margin: 0 auto 20px;
+        &:hover{
+          background-color: #ccc;
+        }
+      }
+    }
+}
+@media screen and (max-width: 976px){
+  .remove-check{
+      .remove-check-area{
+          width: 35%;
+      }
+  }
+}
+@media screen and (max-width: 635px){
+  .remove-check{
+      .remove-check-area{
+          width: 65%;
+      }
+  }
+}
+@media screen and (max-width: 430px){
+  .remove-check{
+      .remove-check-area{
+          width: 70%;
+      }
+  }
 }
 .cart-content{
     width: 100%;
@@ -266,14 +381,18 @@ export default {
             border-bottom: 1px solid rgb(143, 200, 102);
             td{
                 width: 15%;
-                text-align: center;
                 font-size: 18px;
-                color: rgb(49, 49, 49);
-                img{
-                    width: 50%;
-                }
+                text-align: center;
+                vertical-align: middle;
                 &:first-child{
-                    width: 40%;
+                  width: 20%;
+                }
+                &:nth-child(2){
+                  width: 20%;
+                }
+                img{
+                    width: 100%;
+                    vertical-align: middle;
                 }
                 &:first-child span{
                     text-align: center;
@@ -287,7 +406,6 @@ export default {
                 }
                 button{
                   border: none;
-                  color: rgb(49, 49, 49);
                   background-color: transparent;
                   &:hover{
                     color: rgb(143, 200, 102);
@@ -297,7 +415,6 @@ export default {
                     display: block;
                     margin-left: auto;
                     border: none;
-                    color: rgb(49, 49, 49);
                     background-color: transparent;
                     padding: 20px;
                     .fa-trash{
@@ -328,7 +445,6 @@ export default {
     h3{
         font-size: 24px;
         font-weight: 600;
-        color: rgb(49, 49, 49);
         margin-bottom: 10px;
     }
     .money{
@@ -336,7 +452,6 @@ export default {
         justify-content: space-between;
         padding: 10px 0;
         font-size: 18px;
-        color: rgb(49, 49, 49);
         p{
           margin-bottom: 0;
         }
@@ -401,9 +516,7 @@ export default {
           & + li span::before{
               content: '';
               width: 100px;
-              top: 50%;
               left: -100px;
-              z-index: -2;
           }
       }
   }
@@ -412,7 +525,6 @@ export default {
   .cart-progress{
       li{
           span{
-              display: block;
               padding: 5px 10px;
           }
           & + li span::before{

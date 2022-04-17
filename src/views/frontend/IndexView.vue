@@ -1,6 +1,6 @@
 <template>
-    <Loading v-if="isLoading"></Loading>
-    <ScrollTop data-aos="fade-up" data-aos-offset="300"></ScrollTop>
+    <Loading v-if="isLoading"/>
+    <ScrollTop data-aos="fade-up" data-aos-offset="300"/>
     <div class="banner">
         <swiper
             :slides-per-view="1"
@@ -12,30 +12,38 @@
             }"
             :effect="'fade'"
         >
-                <swiper-slide><img src="../assets/slide-img-g3ex.jpg" alt=""></swiper-slide>
-                <swiper-slide><img src="../assets/slide-img-o2ex.jpg" alt=""></swiper-slide>
-                <swiper-slide><img src="../assets/slide-img-s1ex.jpg" alt=""></swiper-slide>
+                <swiper-slide><img src="../../assets/slide-img-g3ex.jpg" alt="首頁背景圖"></swiper-slide>
+                <swiper-slide><img src="../../assets/slide-img-o2ex.jpg" alt="首頁背景圖"></swiper-slide>
+                <swiper-slide><img src="../../assets/slide-img-s1ex.jpg" alt="首頁背景圖"></swiper-slide>
             </swiper>
         <div class="banner-bg">
             <div class="banner-txt">
-                <p>歡迎來到礦石牧場，<br>趕緊來體驗溫馨的牧場生活吧!</p>
+                <p>歡迎來到礦石牧場，趕緊來體驗溫馨的牧場生活吧!</p>
             </div>
             <div class="banner-img">
-                <img src="../assets/img-mv.png" alt="">
+                <img src="../../assets/img-mv.png" alt="牧場照片">
             </div>
         </div>
+        <div class="scroll-down">
+            <span class="arrow" style="--i:1"></span>
+            <span class="arrow" style="--i:2"></span>
+            <span class="arrow" style="--i:3"></span>
+        </div>
     </div>
-    <section class="about">
-        <h2 id="about-title">在礦石牧場裡，你可以...</h2>
+    <section class="about" id="about">
+        <h2 id="about-title">在礦石牧場裡，<span>你可以...</span></h2>
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-4">
                     <div class="about-item" data-aos="fade-up" data-aos-anchor="#about-title"  data-aos-anchor-placement="top-center">
                         <div class="about-img">
-                            <img src="../assets/plant.jpg" alt="">
+                            <img src="../../assets/plant.jpg" alt="種植農作物!">
                         </div>
                         <div class="about-txt">
-                            <h3>種植農作物!</h3>
+                            <h3>
+                                種植農作物!
+                                <img src="../../assets/Hut.png" alt="">
+                            </h3>
                             <p>牧場的田地上，可以種植蔬菜及水果。天天照顧作物直到成熟，就可以採收併出貨囉!</p>
                         </div>
                     </div>
@@ -43,10 +51,13 @@
                 <div class="col-12 col-md-4">
                     <div class="about-item" data-aos="fade-up" data-aos-delay="500" data-aos-anchor="#about-title" data-aos-anchor-placement="top-center">
                         <div class="about-img">
-                            <img src="../assets/husbandry.jpg" alt="">
+                            <img src="../../assets/husbandry.jpg" alt="飼養可愛動物!">
                         </div>
                         <div class="about-txt">
-                            <h3>飼養可愛動物!</h3>
+                            <h3>
+                                飼養可愛動物!
+                                <img src="../../assets/Ranch.png" alt="">
+                            </h3>
                             <p>牧場裡可以飼養各種動物，用心照顧可以產出牛奶或雞蛋喔!</p>
                         </div>
                     </div>
@@ -54,10 +65,13 @@
                 <div class="col-12 col-md-4">
                     <div class="about-item" data-aos="fade-up" data-aos-delay="1000" data-aos-anchor="#about-title" data-aos-anchor-placement="top-center">
                         <div class="about-img">
-                            <img src="../assets/fishing.jpg" alt="">
+                            <img src="../../assets/fishing.jpg" alt="還有其他活動!">
                         </div>
                         <div class="about-txt">
-                            <h3>還有其他活動!</h3>
+                            <h3>
+                                還有其他活動!
+                                <img src="../../assets/Festivals.png" alt="">
+                            </h3>
                             <p>礦石牧場還有許多其他有趣活動，等著你來體驗~</p>
                         </div>
                     </div>
@@ -67,8 +81,8 @@
     </section>
     <div class="products-parallax">
         <div class="parallax-content">
-            <p>覺得動物們很可愛? 那就帶一隻回家吧!</p>
-            <button @click="this.$router.push('/products')">前往牧場商店</button>
+            <p>覺得動物們很可愛? 那就帶一隻回家吧~</p>
+            <button type="button" @click="this.$router.push('/products')">前往牧場商店</button>
         </div>
     </div>
     <section class="hot-products">
@@ -98,7 +112,7 @@
                                 <div class="angle"></div>
                             </div>
                             <div class="product-img">
-                                <img :src="item.imageUrl" alt="">
+                                <img :src="item.imageUrl" :alt="item.title">
                             </div>
                             <div class="product-txt">
                                 <div class="product-title">
@@ -112,7 +126,7 @@
                             </div>
                             </router-link>
                         <div class="cart-btn">
-                            <button @click = "addToCart(item.id)"><i class="fa-solid fa-cart-shopping"></i>加入購物車</button>
+                            <button type="button" @click = "addToCart(item.id)"><i class="fa-solid fa-cart-shopping"></i>加入購物車</button>
                         </div>
                          <div class="fav-heart" v-if="favoriteId.includes(item.id)" @click="removeFavorite(item)">
                             <i class="fa-solid fa-heart"></i>
@@ -260,8 +274,9 @@ export default {
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%,-50%);
-                font-size: 36px;
+                font-size: 40px;
                 font-weight: 600;
+                font-family: 'cwTeXYen', 'Noto Sans TC', sans-serif;
                 line-height: 1.8;
                 margin-bottom: 0;
                 color: white;
@@ -278,6 +293,31 @@ export default {
                 transform: translate(-50%,-50%);
                 vertical-align: middle;
                 max-width: 60%;
+            }
+        }
+    }
+    .scroll-down{
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .arrow{
+            display: block;
+            width: 20px;
+            height: 20px;
+            border-bottom: 3px solid white;
+            border-left: 3px solid white;
+            transform: rotate(-45deg);
+            animation: down 1s ease-in-out infinite;
+            animation-delay: calc(0.3s * var(--i));
+            &:first-child{
+                transform: translateY(5px) rotate(-45deg);
+            }
+            &:nth-child(3){
+                transform: translateY(-5px) rotate(-45deg);
             }
         }
     }
@@ -345,12 +385,14 @@ export default {
     width: 100%;
     padding: 80px 0;
     background-color: rgb(233, 233, 233);
-    background-image: url(../assets/bghorse2.png);
+    background-image: url(../../assets/bghorse2.png);
     h2{
-        font-size: 36px;
+        font-size: 40px;
         text-align: center;
         font-weight: 600;
+        font-family: 'cwTeXYen', 'Noto Sans TC', sans-serif;
         margin-bottom: 50px;
+        color: rgb(143, 200, 102);
     }
     .container{
         .col-12{
@@ -384,14 +426,21 @@ export default {
                 flex-direction: column;
                 flex-grow: 1;
                 h3{
-                    font-size: 24px;
+                    font-size: 30px;
                     font-weight: 600;
+                    font-family: 'cwTeXYen', 'Noto Sans TC', sans-serif;
                     padding: 20px 0;
                     margin-bottom: 0;
-                    color: rgb(143, 200, 102);
+                    color: rgb(185, 142, 81);
+                    img{
+                        width: 40px;
+                        height: 35px;
+                        object-fit: contain;
+                        vertical-align: middle;
+                    }
                 }
                 p{
-                    font-size: 18px;
+                    font-size: 20px;
                     padding: 10px 0;
                     margin-bottom: 0;
                     flex-grow: 1;
@@ -429,6 +478,14 @@ export default {
 }
 @media screen and (max-width:576px) {
     .about{
+        h2{
+            padding: 0 30px;
+            text-align: left;
+            span{
+                display: block;
+                text-align: right;
+            }
+        }
         .container{
             .about-item{
                 padding: 0 15px;
@@ -446,7 +503,7 @@ export default {
     }
 }
 .products-parallax{
-    background-image: url("../assets/hero-news-2.jpg");
+    background-image: url("../../assets/hero-news-2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -455,14 +512,25 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
     .parallax-content{
         p{
             text-align: center;
-            font-size: 36px;
-            padding: 15px;
+            font-family: 'cwTeXYen', 'Noto Sans TC', sans-serif;
+            font-size: 40px;
+            padding: 30px;
             border-radius: 10px;
             font-weight: 600;
-            background-color: rgba(255,255,255,0.3);
+            background-color: rgba(255,255,255,0.8);
         }
         button{
             border: 5px solid white;
@@ -470,9 +538,11 @@ export default {
             padding: 8px 15px;
             display: block;
             margin: auto;
-            font-size: 24px;
+            font-size: 20px;
             color: white;
             background-color: rgb(185, 142, 81);
+            position: relative;
+            z-index: 3;
             &:hover{
                 background-color: rgb(107, 79, 43);
             }
@@ -481,13 +551,15 @@ export default {
 }
 .hot-products{
     padding: 50px 0;
-    background-image: url(../assets/bgalpaca.png);
+    background-image: url(../../assets/bgalpaca.png);
     background-color: rgb(233, 233, 233);
     h2{
-        font-size: 36px;
+        font-size: 40px;
+        font-family: 'cwTeXYen', 'Noto Sans TC', sans-serif;
         text-align: center;
         font-weight: 600;
         margin-bottom: 50px;
+        color: rgb(143, 200, 102);
     }
     .container{
         position: relative;
@@ -501,7 +573,7 @@ export default {
         left: -10px;
         &::after{
             content: '';
-            background-image: url(../assets/prev.png);
+            background-image: url(../../assets/prev.png);
             background-size: cover;
             background-position: center;
             width: 60px;
@@ -513,7 +585,7 @@ export default {
         right: -10px;
         &::after{
             content: '';
-            background-image: url(../assets/arrow.png);
+            background-image: url(../../assets/arrow.png);
             background-size: cover;
             background-position: center;
             width: 60px;
@@ -580,7 +652,7 @@ export default {
             }
             .product-img{
                 overflow: hidden;
-                background-image: url(../assets/bg-layer.png);
+                background-image: url(../../assets/bg-layer.png);
                 background-color: white;
                 img{
                     width: 100%;
@@ -629,7 +701,7 @@ export default {
                     p{
                         margin-bottom: 0;
                         font-size: 20px;
-                        color: rgb(49, 49, 49);
+                        color: black;
                     }
                 }
             }
@@ -673,6 +745,17 @@ export default {
   }
   100% {
     transform: translateY(0px);
+  }
+}
+@keyframes down{
+  0%{
+    opacity: 0.3;
+  }
+  50%{
+    opacity: 1;
+  }
+  40%, 100%{
+     opacity: 0.3;
   }
 }
 </style>

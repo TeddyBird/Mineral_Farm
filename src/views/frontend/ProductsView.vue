@@ -1,29 +1,29 @@
 <template>
     <div class="products">
-        <Loading v-if="isLoading"></Loading>
+        <Loading v-if="isLoading"/>
         <div class="shop-sign" :class="{moveshopsign: !isLoading}">
-            <img src="../assets/shopsign.png" alt="">
+            <img src="../../assets/shopsign.png" alt="牧場商店招牌">
         </div>
         <section class="product-sction">
             <div class="product-sort container">
                 <ul>
                     <li @click = "getProducts(1,'')" :class="{activesort: tempCategory === ''}">全部商品
-                        <img src="../assets/koro-chara.png" alt="">
+                        <img src="../../assets/koro-chara.png" alt="全部商品">
                     </li>
                     <li @click = "getProducts(1,'乳香世家')" :class="{activesort: tempCategory === '乳香世家'}">乳香世家
-                        <img src="../assets/cow.png" alt="">
+                        <img src="../../assets/cow.png" alt="乳香世家">
                     </li>
                     <li @click = "getProducts(1,'母雞咕咕')" :class="{activesort: tempCategory === '母雞咕咕'}">母雞咕咕
-                        <img src="../assets/chicken.png" alt="">
+                        <img src="../../assets/chicken.png" alt="母雞咕咕">
                     </li>
                     <li @click = "getProducts(1,'軟綿綿')" :class="{activesort: tempCategory === '軟綿綿'}">軟綿綿
-                        <img src="../assets/rabbit.png" alt="">
+                        <img src="../../assets/rabbit.png" alt="軟綿綿">
                     </li>
                     <li @click = "getProducts(1,'可愛寵物')" :class="{activesort: tempCategory === '可愛寵物'}">可愛寵物
-                        <img src="../assets/momonosuke.png" alt="">
+                        <img src="../../assets/momonosuke.png" alt="可愛寵物">
                     </li>
                     <li @click = "getProducts(1,'賽馬大會')" :class="{activesort: tempCategory === '賽馬大會'}">賽馬大會
-                        <img src="../assets/horse.png" alt="">
+                        <img src="../../assets/horse.png" alt="賽馬大會">
                     </li>
                 </ul>
             </div>
@@ -41,7 +41,7 @@
                                     <div class="angle"></div>
                                 </div>
                                 <div class="product-img">
-                                    <img :src="item.imageUrl" alt="">
+                                    <img :src="item.imageUrl" :alt="item.title">
                                 </div>
                                 <div class="product-txt">
                                     <div class="product-title">
@@ -55,7 +55,7 @@
                                 </div>
                                 </router-link>
                             <div class="cart-btn">
-                                <button @click = "addToCart(item.id)"><i class="fa-solid fa-cart-shopping"></i>加入購物車</button>
+                                <button type="button" @click = "addToCart(item.id)"><i class="fa-solid fa-cart-shopping"></i>加入購物車</button>
                             </div>
                             <div class="fav-heart" v-if="favoriteId.includes(item.id)" @click="removeFavorite(item)">
                                 <i class="fa-solid fa-heart"></i>
@@ -68,7 +68,7 @@
                 </ul>
             </div>
         </section>
-        <pagination :category="tempCategory" :pages="paginationInfo" @get-page="getProducts"></pagination>
+        <pagination :category="tempCategory" :pages="paginationInfo" @get-page="getProducts"/>
     </div>
 </template>
 
@@ -175,7 +175,7 @@ export default {
 
 <style lang="scss">
 .products{
-    background-image: url(../assets/bg_pattern_brick_pink.png);
+    background-image: url(../../assets/bg_pattern_brick_pink.png);
     position: relative;
     z-index: 1;
     min-height: calc(100vh - 225px);
@@ -223,17 +223,17 @@ export default {
         justify-content: center;
         border-bottom: 1px solid rgb(143, 1, 1);
         padding-left: 0;
+        font-family: 'cwTeXYen', 'Noto Sans TC', sans-serif;
         li{
             border-radius: 10px 10px 0 0;
             width: 15%;
             padding: 10px;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 600;
             color: rgb(143, 1, 1);
             text-align: center;
             cursor: pointer;
             position: relative;
-            // background-color: white;
             img{
                 width: 100px;
                 position: absolute;
@@ -387,7 +387,7 @@ select{
             }
             .product-img{
                 overflow: hidden;
-                background-image: url(../assets/bg-layer.png);
+                background-image: url(../../assets/bg-layer.png);
                 background-color: white;
                 img{
                     width: 100%;
@@ -436,7 +436,7 @@ select{
                     p{
                         margin-bottom: 0;
                         font-size: 20px;
-                        color: rgb(49, 49, 49);
+                        color: black;
                     }
                 }
             }

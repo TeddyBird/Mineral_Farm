@@ -41,6 +41,7 @@ export default {
         display: block;
         font-size: 20px;
         font-weight: 600;
+        font-family: 'cwTeXYen', 'Noto Sans TC', sans-serif;
         text-align: center;
         color: rgb(49, 49, 49);
     }

@@ -1,5 +1,5 @@
 <template>
-  <Loading v-if="isLoading"></Loading>
+  <Loading v-if="isLoading"/>
   <div class="product">
     <div class="product-content">
       <div class="container">
@@ -7,11 +7,11 @@
           <div class="col-12 col-lg-5">
             <div class="product-img">
               <div class="main-img">
-                <img :src="product.imageUrl" ref="mainImg">
+                <img :src="product.imageUrl" ref="mainImg" :alt="`${product.title}圖片1`">
               </div>
               <div class="switch-imgs">
                 <div class="switch-img" v-for="(img,index) in product.imagesUrl" :key="img+1" @click="changeImg(index)" :class="{tempimg: img === temImage}">
-                  <img :src="img" alt="">
+                  <img :src="img" :alt="`${product.title}圖片${index+1}`">
                 </div>
               </div>
             </div>
@@ -30,11 +30,11 @@
               </div>
               <div class="shopcart">
                 <div class="counter">
-                  <button class="minus" @click="minusNum" :disabled="qty === 1"><i class="fa-solid fa-minus"></i></button>
+                  <button type="button" class="minus" @click="minusNum" :disabled="qty === 1"><i class="fa-solid fa-minus"></i></button>
                   <input type="number" v-model.number="qty" disabled>
-                  <button class="plus" @click="plusNum"><i class="fa-solid fa-plus"></i></button>
+                  <button type="button" class="plus" @click="plusNum"><i class="fa-solid fa-plus"></i></button>
                 </div>
-                <button class="add-cart" @click="addToCart(product.id)"><i class="fa-solid fa-cart-shopping"></i>加入購物車</button>
+                <button type="button" class="add-cart" @click="addToCart(product.id)"><i class="fa-solid fa-cart-shopping"></i>加入購物車</button>
               </div>
             </div>
           </div>
@@ -52,7 +52,7 @@
                               <div class="angle"></div>
                           </div>
                           <div class="product-img">
-                              <img :src="item.imageUrl" alt="">
+                              <img :src="item.imageUrl" :alt="item.title">
                           </div>
                           <div class="product-txt">
                               <div class="product-title">
@@ -66,7 +66,7 @@
                           </div>
                           </router-link>
                       <div class="cart-btn">
-                          <button @click = "addToCart(item.id)"><i class="fa-solid fa-cart-shopping"></i>加入購物車</button>
+                          <button type="button" @click = "addToCart(item.id)"><i class="fa-solid fa-cart-shopping"></i>加入購物車</button>
                       </div>
                       <div class="fav-heart" v-if="favoriteId.includes(item.id)" @click="removeFavorite(item)">
                           <i class="fa-solid fa-heart"></i>
@@ -214,7 +214,7 @@ export default {
 
 <style lang="scss">
 .product{
-    background-image: url(../assets/bg_pattern_brick_pink.png);
+    background-image: url(../../assets/bg_pattern_brick_pink.png);
     position: relative;
     z-index: 1;
     min-height: 80vh;
@@ -226,7 +226,7 @@ export default {
     .main-img{
       width: 100%;
       margin: 0 0 30px 0;
-      background-image: url(../assets/bg-layer.png);
+      background-image: url(../../assets/bg-layer.png);
       background-color: rgb(74, 182, 74);
       position: relative;
       box-shadow: 8px 8px rgba(0, 0, 0, .2);
@@ -235,7 +235,7 @@ export default {
         width: 2.1vw;
         height: 3.3vw;
         position: absolute;
-        background-image: url(../assets/img-pin.png);
+        background-image: url(../../assets/img-pin.png);
         background-repeat: no-repeat;
         background-size: cover;
         top: -25px;
@@ -250,7 +250,7 @@ export default {
     .switch-imgs{
       display: flex;
       width: 100%;
-      background-image: url(../assets/woodbg.png);
+      background-image: url(../../assets/woodbg.png);
       background-size: cover;
       background-position: center;
       padding: 15px;
@@ -258,7 +258,7 @@ export default {
       box-shadow: 8px 8px rgba(0, 0, 0, .2);
       .switch-img{
         width:20%;
-        background-image: url(../assets/bg-layer.png);
+        background-image: url(../../assets/bg-layer.png);
          background-color: rgb(74, 182, 74);
         img{
           width: 100%;
@@ -285,8 +285,9 @@ export default {
       padding: 20px 0;
       margin-bottom: 0;
       font-weight: 600;
-      font-size: 36px;
+      font-size: 40px;
       color: rgb(185, 142, 81);
+      font-family: 'cwTeXYen', 'Noto Sans TC', sans-serif;
     }
     .description{
       font-size: 20px;
@@ -401,11 +402,12 @@ export default {
 .relative{
   padding: 20px 0;
   h2{
-    font-size: 36px;
+    font-size: 40px;
     text-align: center;
     font-weight: 600;
     margin-bottom: 50px;
     color: rgb(185, 142, 81);
+    font-family: 'cwTeXYen', 'Noto Sans TC', sans-serif;
   }
 }
 .product-area{
@@ -474,7 +476,7 @@ export default {
             }
             .product-img{
                 overflow: hidden;
-                background-image: url(../assets/bg-layer.png);
+                background-image: url(../../assets/bg-layer.png);
                 background-color: white;
                 img{
                     width: 100%;
@@ -523,7 +525,6 @@ export default {
                     p{
                         margin-bottom: 0;
                         font-size: 20px;
-                        color: rgb(49, 49, 49);
                     }
                 }
             }
