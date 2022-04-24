@@ -30,10 +30,10 @@
                               <td>
                                   <img :src="item.product.imageUrl" :alt="item.product.title">
                               </td>
-                              <td>{{item.product.title}}</td>
+                              <td>{{ item.product.title }}</td>
                               <td><input min="1" type="number" v-model.number="item.qty" @change = "updateCart(item)"></td>
-                              <td>{{item.product.unit}}</td>
-                              <td>{{item.total}} G</td>
+                              <td>{{ item.product.unit }}</td>
+                              <td>{{ item.total }} G</td>
                               <td>
                                 <button type="button" @click="removeId = item.product.id"><i class="fa-solid fa-trash"></i>
                                 </button>
@@ -46,7 +46,7 @@
                                     ">
                                   </div>
                                   <p v-if="removeId==='all'">確認刪除<span>全部商品</span>嗎?</p>
-                                  <p v-else>確認刪除<span>{{item.product.title}}</span>嗎?</p>
+                                  <p v-else>確認刪除<span>{{ item.product.title }}</span>嗎?</p>
                                   <button type="button" @click="removeId==='all'? removeAllCart() : removeCart(item.id)">確認</button>
                                 </div>
                               </div>
@@ -65,13 +65,13 @@
                   <div class="cart-total">
                       <h3>訂單總額</h3>
                       <div class="total money" v-if="couponUsed">
-                        <span>小計</span><p>{{cartData.total}} G</p>
+                        <span>小計</span><p>{{ cartData.total }} G</p>
                       </div>
                       <div class="discount money" v-if="couponUsed">
-                        <span>折扣</span><p>- {{cartData.total - cartData.final_total}} G</p>
+                        <span>折扣</span><p>- {{ cartData.total - cartData.final_total }} G</p>
                       </div>
                       <div class="finall-total money">
-                        <span>總計</span><p>{{cartData.final_total}} G</p>
+                        <span>總計</span><p>{{ cartData.final_total }} G</p>
                       </div>
                       <div class="coupon-btn" v-if="cartData.carts.length !== 0">
                         <input ref="couponinput" type="text" placeholder="小遊戲可取得優惠碼喔!" v-model="couponCode">
@@ -191,10 +191,19 @@ export default {
         .then(res => {
           this.getCartData()
           this.couponUsed = res.data.success
+          this.emitter.emit('push-toast', {
+            style: 'success',
+            title: '已使用折扣碼'
+          })
         })
-        .catch(() => {
+        .catch((err) => {
           this.$refs.couponinput.value = ''
           this.$refs.couponinput.placeholder = '小遊戲可取得優惠碼喔!'
+          this.emitter.emit('push-toast', {
+            style: 'danger',
+            title: '使用折扣碼失敗',
+            content: err.response.data.message
+          })
         })
     }
   },
@@ -206,13 +215,13 @@ export default {
 
 <style lang="scss">
 .cart{
-  background-image: url(../../assets/mainbg-s.jpg);
+  background-image: url(../../assets/bg-tokuten.jpg);
   background-size: cover;
-  background-position-y: bottom;
+  background-position-y: top;
   padding: 50px 0;
   position: relative;
   z-index: 1;
-  min-height: calc(100vh - 225px);
+  min-height: calc(100vh - 210px);
 }
 .cart-progress{
     display: flex;

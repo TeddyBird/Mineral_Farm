@@ -46,7 +46,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="this.$emit('close-coupon')">Close</button>
-                    <button type="button" class="btn btn-primary" @click="action==='create'?createCoupon():updateCoupon(currentItem.id)">{{action==='create'?'新增優惠卷':'編輯優惠卷'}}</button>
+                    <button type="button" class="btn btn-primary" @click="action==='create'?createCoupon():updateCoupon(currentItem.id)">{{ action==='create'?'新增優惠卷':'編輯優惠卷' }}</button>
                 </div>
             </div>
         </div>

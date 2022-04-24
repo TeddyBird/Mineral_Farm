@@ -1,7 +1,7 @@
 <template>
     <div class="to-top" @click="goTop">
         <div class="to-top-img">
-            <img src="../assets/cow.gif" alt="">
+            <img src="../assets/cow.gif" alt="乳牛動圖">
         </div>
         <span>回到頁首</span>
     </div>

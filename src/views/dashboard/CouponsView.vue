@@ -18,9 +18,9 @@
             </thead>
             <tbody>
                 <tr v-for="coupon in coupons" :key="coupon.code">
-                    <td>{{coupon.title}}</td>
-                    <td>{{coupon.percent}}%</td>
-                    <td>{{new Date(coupon.due_date*1000).toLocaleDateString()}}</td>
+                    <td>{{ coupon.title }}</td>
+                    <td>{{ coupon.percent }}%</td>
+                    <td>{{ new Date(coupon.due_date*1000).toLocaleDateString() }}</td>
                     <td>
                         <span v-if="coupon.is_enabled" class="text-success">啟用</span>
                         <span v-else class="text-muted">未啟用</span>

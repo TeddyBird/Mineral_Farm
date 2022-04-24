@@ -18,7 +18,7 @@
                       <label for="imageUrl" class="form-label">主要圖片</label>
                       <input type="text" class="form-control" placeholder="請輸入圖片連結" v-model="currentItem.imageUrl">
                     </div>
-                    <img class="img-fluid" :src="currentItem.imageUrl" alt="">
+                    <img class="img-fluid" :src="currentItem.imageUrl" :alt="currentItem.title">
                   </div>
                   <h5>多圖新增</h5>
                   <div class="mb-2" v-for="(image, index) in currentItem.imagesUrl" :key="index+1">
@@ -26,16 +26,16 @@
                       <label for="imageUrl" class="form-label">圖片網址</label>
                       <input type="text" class="form-control" placeholder="請輸入圖片連結" v-model="currentItem.imagesUrl[index]">
                     </div>
-                    <img class="img-fluid" :src="image" alt="">
+                    <img class="img-fluid" :src="image" :alt="`${currentItem.title}圖片${index+1}`">
                   </div>
                   <div>
-                    <button class="btn btn-outline-primary btn-sm d-block w-100 mb-3" @click="addImage"
+                    <button  type="button" class="btn btn-outline-primary btn-sm d-block w-100 mb-3" @click="addImage"
                     v-if="currentItem.imagesUrl === undefined || currentItem.imagesUrl[currentItem.imagesUrl.length - 1] || currentItem.imagesUrl.length === 0">
                       新增圖片
                     </button>
                   </div>
                   <div>
-                    <button class="btn btn-outline-danger btn-sm d-block w-100" @click="removeImage"
+                    <button type="button" class="btn btn-outline-danger btn-sm d-block w-100" @click="removeImage"
                     v-if="currentItem.imagesUrl !== undefined && currentItem.imagesUrl.length !== 0">
                       刪除圖片
                     </button>

@@ -22,13 +22,13 @@
 
 <style lang="scss">
 .finish{
-  background-image: url(../../assets/mainbg-s.jpg);
+  background-image: url(../../assets/bg-tokuten.jpg);
   background-size: cover;
-  background-position-y: bottom;
+  background-position-y: top;
   padding: 50px 0;
   position: relative;
   z-index: 1;
-  min-height: calc(100vh - 225px);
+  min-height: calc(100vh - 210px);
 }
 .cart-progress{
     display: flex;

@@ -3,7 +3,7 @@
         <ul>
             <li class="pre-page" :class="{disabledBtn:!pages.has_pre}" @click="changePage('prev')"><i class="fa-solid fa-angles-left"></i></li>
             <li v-for="page in pages.total_pages" :key="page+1" :class="{activePage: pages.current_page === page}"
-            @click="$emit('get-page',page, category)">{{page}}</li>
+            @click="$emit('get-page',page, category)">{{ page }}</li>
             <li class="next-page" :class="{disabledBtn:!pages.has_next}" @click="changePage('next')"><i class="fa-solid fa-angles-right"></i></li>
         </ul>
     </div>

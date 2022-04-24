@@ -15,8 +15,8 @@
             <tbody>
                 <template v-for="(order, key) in orders" :key="key">
                     <tr v-if="orders.length" :class="{ 'text-secondary': !order.is_paid }">
-                        <td>{{new Date(order.create_at*1000).toLocaleDateString()}}</td>
-                        <td><span v-if="order.user">{{order.user.email}}</span></td>
+                        <td>{{ new Date(order.create_at*1000).toLocaleDateString() }}</td>
+                        <td><span v-if="order.user">{{ order.user.email }}</span></td>
                         <td>
                             <ul class="list-unstyled">
                             <li v-for="(product, i) in order.products" :key="i">

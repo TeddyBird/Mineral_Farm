@@ -20,18 +20,18 @@
                     <tr v-for="item in orderInfo.products" :key="item.id">
                         <td>
                             <img :src="item.product.imageUrl" :alt="item.product.title">
-                            <span>{{item.product.title}}</span>
+                            <span>{{ item.product.title }}</span>
                         </td>
                         <td>
-                            {{item.qty}}
-                            {{item.product.unit}}
+                            {{ item.qty }}
+                            {{ item.product.unit }}
                         </td>
-                        <td>{{item.final_total}} G</td>
+                        <td>{{ item.final_total }} G</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>總計</td>
-                        <td>{{orderInfo.total}} G</td>
+                        <td>{{ orderInfo.total }} G</td>
                     </tr>
                 </tbody>
             </table>
@@ -44,19 +44,19 @@
                 <tbody>
                     <tr>
                         <td>姓名</td>
-                        <td>{{user.name}}</td>
+                        <td>{{ user.name }}</td>
                     </tr>
                     <tr>
                         <td>信箱</td>
-                        <td>{{user.email}}</td>
+                        <td>{{ user.email }}</td>
                     </tr>
                     <tr>
                         <td>電話</td>
-                        <td>{{user.tel}}</td>
+                        <td>{{ user.tel }}</td>
                     </tr>
                     <tr>
                         <td>地址</td>
-                        <td>{{user.address}}</td>
+                        <td>{{ user.address}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -121,13 +121,13 @@ export default {
 
 <style lang="scss">
 .pay{
-  background-image: url(../../assets/mainbg-s.jpg);
+  background-image: url(../../assets/bg-tokuten.jpg);
   background-size: cover;
-  background-position-y: bottom;
+  background-position-y: top;
   padding: 50px 0;
   position: relative;
   z-index: 1;
-  min-height: calc(100vh - 225px);
+  min-height: calc(100vh - 210px);
 }
 .cart-progress{
     display: flex;
@@ -209,6 +209,7 @@ export default {
             td{
                 width: 30%;
                 font-size: 18px;
+                padding: 5px 0;
                 img{
                     width: 50%;
                 }
@@ -267,7 +268,7 @@ export default {
                 width: 70%;
             }
             &:nth-child(even){
-                background-color: rgba(194, 194, 194, 0.9);
+                background-color: rgb(231, 231, 231);
             }
         }
     }

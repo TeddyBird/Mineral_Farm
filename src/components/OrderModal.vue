@@ -57,12 +57,12 @@
                   </tr>
                   <tr>
                     <th>下單時間</th>
-                    <td>{{new Date(currentItem.create_at*1000).toLocaleDateString()}}</td>
+                    <td>{{ new Date(currentItem.create_at*1000).toLocaleDateString() }}</td>
                   </tr>
                   <tr>
                     <th>付款時間</th>
                     <td>
-                      <span v-if="currentItem.paid_date">{{new Date(currentItem.paid_date*1000).toLocaleDateString()}}</span>
+                      <span v-if="currentItem.paid_date">{{ new Date(currentItem.paid_date*1000).toLocaleDateString() }}</span>
                       <span v-else>時間不正確</span>
                     </td>
                   </tr>
@@ -77,7 +77,7 @@
                   </tr>
                   <tr>
                     <th>總金額</th>
-                    <td>{{currentItem.total}}</td>
+                    <td>{{ currentItem.total }}</td>
                   </tr>
                 </tbody>
               </table>

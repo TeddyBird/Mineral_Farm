@@ -24,7 +24,7 @@
               <div class="form-group">
                   <label for="tel">手機</label>
                   <span>必填</span>
-                  <Field id="tel" name="手機" type="tel" :rules="isPhone" placeholder="請填寫手機" v-model="form.user.tel"></Field>
+                  <Field id="tel" name="手機" type="tel" :rules="isPhone" placeholder="請填寫手機(09)" v-model="form.user.tel"></Field>
                   <ErrorMessage name="手機" class="err-msg"/>
               </div>
               <div class="form-group">
@@ -94,7 +94,7 @@ export default {
     },
     isPhone (value) {
       const phoneNumber = /^(09)[0-9]{8}$/
-      return phoneNumber.test(value) ? true : '需要正確的手機號碼'
+      return phoneNumber.test(value) ? true : '需要正確的手機號碼(09)'
     }
   }
 }
@@ -102,13 +102,13 @@ export default {
 
 <style lang="scss">
 .order{
-  background-image: url(../../assets/mainbg-s.jpg);
+  background-image: url(../../assets/bg-tokuten.jpg);
   background-size: cover;
-  background-position-y: bottom;
+  background-position-y: top;
   padding: 50px 0;
   position: relative;
   z-index: 1;
-  min-height: calc(100vh - 225px);
+  min-height: calc(100vh - 210px);
 }
 .cart-progress{
     display: flex;

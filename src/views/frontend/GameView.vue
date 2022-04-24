@@ -6,7 +6,7 @@
                 <img src="../../assets/goddess_happy.png" alt="女神高興表情">
             </div>
             <div class="coupon-txt">
-                <p>連續答對{{score}}次太厲害了! 就送你優惠碼吧!</p>
+                <p>連續答對{{ score }}次太厲害了! 就送你優惠碼吧!</p>
                 <p>優惠碼: <strong id="coupon">megami666</strong><button type="button" @click="copyCoupon">複製</button></p>
             </div>
         </div>
@@ -27,7 +27,7 @@
                     </div>
                     <template v-if="gameStatus === 'play' || gameStatus === 'continue'">
                         <div class="talk"  v-if = "runDown === 1">
-                            <p>現在數字是{{newNum}}，下個數字會比較...</p>
+                            <p>現在數字是{{ newNum }}，下個數字會比較...</p>
                             <div class="game-btn">
                                 <button type="button" @click = "guessNum('big')">大</button>
                                 <button type="button" @click = "guessNum('small')">小</button>
@@ -38,7 +38,7 @@
                         </div>
                         <template v-if = "runDown === 2">
                             <div class="talk" v-if ="gameResult ==='right'" @click = "runDown = 1">
-                                <p>結果是{{newNum}}，剛剛是{{oldNum}}，你選的是{{choice}}，所以...</p>
+                                <p>結果是{{ newNum }}，剛剛是{{ oldNum }}，你選的是{{ choice }}，所以...</p>
                                 <p>答對啦!!繼續吧~~</p>
                                 <span>點擊對話框繼續遊戲<i class="fa-solid fa-caret-down"></i></span>
                                 <div class="megami">
@@ -46,15 +46,15 @@
                                 </div>
                             </div>
                             <div class="talk" v-if ="gameResult ==='wrong'" @click="resetGame">
-                                <p>結果是{{newNum}}，剛剛是{{oldNum}}，你選的是{{choice}}，所以...</p>
-                                <p>答錯囉，總共連續答對{{score}}次，要再玩一次嗎?</p>
+                                <p>結果是{{ newNum }}，剛剛是{{ oldNum }}，你選的是{{ choice }}，所以...</p>
+                                <p>答錯囉，總共連續答對{{ score }}次，要再玩一次嗎?</p>
                                 <span>點擊對話框重新遊戲<i class="fa-solid fa-caret-down"></i></span>
                                 <div class="megami">
                                     <img src="../../assets/goddess_sad.png" alt="女神失望表情">
                                 </div>
                             </div>
                             <div class="talk" v-if ="gameResult ==='nothing'" @click = "runDown = 1">
-                                <p>結果是{{newNum}}，剛剛是{{oldNum}}，剛好一樣呢，再猜一次吧~</p>
+                                <p>結果是{{ newNum }}，剛剛是{{ oldNum }}，剛好一樣呢，再猜一次吧~</p>
                                 <span>點擊對話框繼續遊戲<i class="fa-solid fa-caret-down"></i></span>
                                 <div class="megami">
                                     <img src="../../assets/goddess_concerned.png" alt="女神驚訝表情">
@@ -207,7 +207,7 @@ export default {
 .game-section{
     padding: 30px 0;
     background-image: url(../../assets/bg_pattern_brick.png);
-    min-height: calc(100vh - 225px);
+    min-height: calc(100vh - 210px);
     font-family: 'cwTeXYen', 'Noto Sans TC', sans-serif;
     .game{
         position: relative;

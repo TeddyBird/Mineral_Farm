@@ -19,10 +19,10 @@
           </thead>
           <tbody>
             <tr v-for="(item) in products" :key = "item.id">
-              <td>{{item.category}}</td>
-              <td>{{item.title}}</td>
-              <td>{{item.origin_price}}</td>
-              <td>{{item.price}}</td>
+              <td>{{ item.category }}</td>
+              <td>{{ item.title }}</td>
+              <td>{{ item.origin_price }}</td>
+              <td>{{ item.price }}</td>
               <td>
                 <span class="text-success" v-if="item.is_enabled === 1">啟用</span>
                 <span v-else>未啟用</span>

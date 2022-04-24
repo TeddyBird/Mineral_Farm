@@ -4,13 +4,13 @@
         <div class="container">
             <div class="title">
                 <h2>您的追蹤清單</h2>
-                <span>共 {{favoriteList.length}} 項</span>
+                <span>共 {{ favoriteList.length }} 項</span>
             </div>
             <ul class="product-area row">
                 <li class="product-card col-12 col-md-6 col-lg-3" v-for="item in favoriteList" :key="item.id">
                     <div class="product-item">
                         <router-link :to="`/product/${item.id}`">
-                            <div class="tag" v-if="item.tag">{{item.tag}}
+                            <div class="tag" v-if="item.tag">{{ item.tag }}
                                 <div class="angle"></div>
                             </div>
                             <div class="product-img">
@@ -18,12 +18,12 @@
                             </div>
                             <div class="product-txt">
                                 <div class="product-title">
-                                    <h3>{{item.title}}</h3>
-                                    <span>{{item.category}}</span>
+                                    <h3>{{ item.title }}</h3>
+                                    <span>{{ item.category }}</span>
                                 </div>
                                 <div class="product-price">
-                                    <del v-if="item.origin_price !== item.price">{{item.origin_price}} G</del>
-                                    <p>{{item.price}} G</p>
+                                    <del v-if="item.origin_price !== item.price">{{ item.origin_price }} G</del>
+                                    <p>{{ item.price }} G</p>
                                 </div>
                             </div>
                             </router-link>
@@ -113,7 +113,7 @@ export default {
 
 <style lang="scss">
 .favorite{
-    min-height: calc(100vh - 225px);
+    min-height: calc(100vh - 210px);
     background-image: url(../../assets/bg_pattern_brick_pink.png);
     padding: 25px 0;
     .title{
@@ -170,7 +170,7 @@ export default {
             }
             .tag {
                 min-width: 70px;
-                background-color: rgba(255, 154, 38);
+                background-color: rgb(185, 142, 81);
                 padding: 5px 10px;
                 text-align: center;
                 color: white;
@@ -182,7 +182,7 @@ export default {
                 .angle {
                     height: 0;
                     width: 0;
-                    border-top: 9px solid rgb(143, 1, 1);
+                    border-top: 9px solid rgb(107, 79, 43);
                     border-left: 9px solid transparent;
                     position: absolute;
                     left: 0;
@@ -195,7 +195,7 @@ export default {
                 right: 5px;
                 .fa-heart{
                     font-size: 35px;
-                    color: rgb(247, 108, 74);
+                    color: rgb(185, 142, 81);
                 }
             }
             .product-img{

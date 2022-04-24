@@ -11,7 +11,7 @@
             data-bs-dismiss="modal" aria-label="Close" @click="this.$emit('close-del')"></button>
         </div>
         <div class="modal-body">
-          是否刪除 <strong class="text-danger">訂單{{currentItem.id}}</strong> (刪除後將無法恢復)。
+          是否刪除 <strong class="text-danger">訂單{{ currentItem.id }}</strong> (刪除後將無法恢復)。
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary"

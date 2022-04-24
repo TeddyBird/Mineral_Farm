@@ -2,7 +2,7 @@
     <div class="loading-bg">
         <div class="load-content">
             <div class="load-img">
-                <img src="../assets/chicken.gif" alt="">
+                <img src="../assets/chicken.gif" alt="母雞動圖">
             </div>
             <div class="load-txt">
                 <span style="--i:1">N</span>

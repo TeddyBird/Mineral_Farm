@@ -2,7 +2,7 @@
     <header>
         <h1 class="logo">
             <router-link to="/">
-                <img src="../assets/logo.png" alt="">
+                <img src="../assets/logo.png" alt="礦石牧場LOGO">
             </router-link>
         </h1>
         <nav :class="{togglenav: toggleMenu}">
@@ -17,7 +17,7 @@
                 </router-link>
                 <router-link to="/cart">
                     <i class="fa-solid fa-cart-shopping"></i>
-                    <div class="shopcart-alert" v-if="cartData.carts.length !== 0">{{cartData.carts.length}}</div>
+                    <div class="shopcart-alert" v-if="cartData.carts.length !== 0">{{ cartData.carts.length }}</div>
                 </router-link>
                 <router-link to="/admin">
                     <i class="fa-solid fa-user-gear"></i>
@@ -74,7 +74,7 @@ header{
     position: sticky;
     top: 0;
     z-index: 99;
-    height: 95px;
+    height: 80px;
     .logo{
         margin-bottom: 0;
         width: 150px;

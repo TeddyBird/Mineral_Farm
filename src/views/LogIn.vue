@@ -68,7 +68,7 @@ export default {
         background-image: url(../assets/bg02.png);
         background-size: cover;
         background-position: bottom;
-        min-height: calc(100vh - 225px);
+        min-height: calc(100vh - 210px);
         display: flex;
         justify-content: center;
         align-items: center;
