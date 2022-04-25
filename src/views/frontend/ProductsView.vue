@@ -369,7 +369,7 @@ select{
                 .angle {
                     height: 0;
                     width: 0;
-                    border-top: 9px solid ;
+                    border-top: 9px solid rgb(107, 79, 43);
                     border-left: 9px solid transparent;
                     position: absolute;
                     left: 0;
