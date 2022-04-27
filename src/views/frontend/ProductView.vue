@@ -19,7 +19,17 @@
           <div class="col-12 col-lg-7">
             <div class="product-txt">
               <span class="category">{{ product.category }}</span>
-              <h2>{{ product.title }}</h2>
+              <h2>
+                {{ product.title }}
+                <span>
+                      <div class="fav-heart" v-if="favoriteId.includes(product.id)" @click="removeFavorite(product)">
+                          <i class="fa-solid fa-heart"></i>
+                      </div>
+                      <div class="fav-heart" @click="addFavorite(product)" v-else>
+                          <i class="fa-regular fa-heart"></i>
+                      </div>
+                </span>
+              </h2>
               <span class="description">【產品介紹】</span>
               <p>{{ product.description }}</p>
               <span class="description">【生長週期】</span>
@@ -282,6 +292,8 @@ export default {
       white-space:nowrap;
     }
     h2{
+      display: flex;
+      justify-content: space-between;
       padding: 20px 0;
       margin-bottom: 0;
       font-weight: 600;
