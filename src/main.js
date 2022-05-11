@@ -8,7 +8,6 @@ import { Field, Form, ErrorMessage, defineRule, configure } from 'vee-validate'
 import { required, email, min, numeric } from '@vee-validate/rules'
 import { localize, setLocale } from '@vee-validate/i18n'
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
-import $httpToastState from '@/methods/pushToastState'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import '../public/css/reset.css'
@@ -29,7 +28,6 @@ router.afterEach((to, from, next) => {
 })
 
 const app = createApp(App)
-app.config.globalProperties.$httpToastState = $httpToastState
 app.use(router)
 app.use(VueAxios, axios)
 app.use(AOS)
